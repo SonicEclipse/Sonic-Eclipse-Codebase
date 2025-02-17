@@ -115,8 +115,8 @@ function player_state_aerodash(){
 		
 		//Set the ground speed, Y speed and update the state
 		if(ground)
-			ground_speed = (5+(floor(spindash_rev)/2)) * _x_direction;
-		else x_speed = (5+(floor(spindash_rev)/2)) * _x_direction;
+			ground_speed = (6.5+(floor(spindash_rev)/2)) * _x_direction;
+		else x_speed = (6.5+(floor(spindash_rev)/2)) * _x_direction;
 		if(_y_direction == -1) {
 			if (_x_direction == 0) y_speed = -10;
 			else y_speed = -7;

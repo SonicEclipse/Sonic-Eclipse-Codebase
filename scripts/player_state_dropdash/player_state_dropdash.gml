@@ -17,15 +17,12 @@ function player_state_dropdash(){
 	}
 	
 	//Reset the timer
-	if(state != ST_JUMP || state == ST_DROPDASH || shield != S_NONE && shield != S_NORMAL)
+	if(state != ST_JUMP || state == ST_DROPDASH)
 		dropdash_timer = 0;
-		
-	
+
 	//If not dropdash stop
 	if(state != ST_DROPDASH) 
-	{
 		exit;
-	}
 	
 	//Animate dropdash
 	animation_play(animator, ANIM_DROPDASH);
