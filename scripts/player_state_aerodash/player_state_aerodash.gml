@@ -65,8 +65,8 @@ function player_state_aerodash(){
 		//}
 		
 		//Update spindash rev
-		spindash_pitch = min(spindash_pitch + 1, 12);
-		spindash_rev = min(spindash_rev + 2, 9);
+		spindash_pitch = min(spindash_pitch + 0.5, 12);
+		spindash_rev = min(spindash_rev + 0.5, 9);
 		
 		//Slow X and Y speed down
 		x_speed *= 0.75;
