@@ -39,7 +39,5 @@
 	}
 	
 	//Draw spindash dust effect
-	if(!global.chaotix_dust_effect && state = ST_SPINDASH && ground)
-	{
-		draw_sprite_ext(spr_effect_spindash, spindash_dust_frames, floor(x) - 2 * facing, floor(y) + hitbox_h + 1, facing, 1, 0, c_white, 1);	
-	}
+	if(!global.chaotix_dust_effect && (state = ST_SPINDASH || state = ST_FAST_SPINDASH) && ground)
+		draw_sprite_ext(spr_effect_spindash, spindash_dust_frames, floor(x) - 2 * facing, floor(y) + hitbox_h + 1, facing, 1, ground_angle, c_white, 1);

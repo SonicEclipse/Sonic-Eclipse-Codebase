@@ -19,6 +19,7 @@ function player_get_input(){
 	press_b = Input.BPress;
 	press_c = Input.CPress;
 	press_action = Input.ActionPress;	
+	all_press_action = Input.AllActionPress;
 	
 	//Disable inputs
 	if(input_disable)
@@ -41,7 +42,8 @@ function player_get_input(){
 		press_a = false;
 		press_b = false;
 		press_c = false;
-		press_action = false;	
+		press_action = false;
+		all_press_action = false;
 	}
 	
 	//Shell related
@@ -66,5 +68,6 @@ function player_get_input(){
 		press_b = false;
 		press_c = false;
 		press_action = false;	
+		all_press_action = false;
 	}
 }

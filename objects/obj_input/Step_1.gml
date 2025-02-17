@@ -11,7 +11,8 @@
 		A = keyboard_check(global.a) || gamepad_button_check(global.gamepad_slot, gp_face1);
 		B = keyboard_check(global.b) || gamepad_button_check(global.gamepad_slot, gp_face2);
 		C = keyboard_check(global.c) || gamepad_button_check(global.gamepad_slot, gp_face3);
-		Action = A || B || C;
+		Action = A || B;
+		AllAction = A || B || C;
 		Start = keyboard_check(global.start) || gamepad_button_check(global.gamepad_slot, gp_start);
 
 		//Pressed
@@ -22,7 +23,8 @@
 		APress = keyboard_check_pressed(global.a) || gamepad_button_check_pressed(global.gamepad_slot, gp_face1);
 		BPress = keyboard_check_pressed(global.b) || gamepad_button_check_pressed(global.gamepad_slot, gp_face2);
 		CPress = keyboard_check_pressed(global.c) || gamepad_button_check_pressed(global.gamepad_slot, gp_face3);
-		ActionPress = APress || BPress || CPress;
+		ActionPress = APress || BPress;
+		AllActionPress = APress || BPress || CPress;
 		StartPress = keyboard_check_pressed(global.start) || gamepad_button_check_pressed(global.gamepad_slot, gp_start);
 		
 		//Analog input presses

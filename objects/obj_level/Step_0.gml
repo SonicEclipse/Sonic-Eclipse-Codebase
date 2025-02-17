@@ -23,7 +23,8 @@
 	{
 		global.ring_extralife += 100;
 		global.life += 1;
-		play_sound(j_extra_life);
+		if !audio_is_playing(j_zone_complete)
+			play_sound(j_extra_life);
 	}
 	if(global.rings <= global.ring_extralife-200)
 	{

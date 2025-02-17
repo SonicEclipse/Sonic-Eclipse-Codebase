@@ -83,7 +83,36 @@
 		//Draw surface
 		draw_surface(surf, camera_get_view_x(view_camera[view_current]), camera_get_view_y(view_camera[view_current]))	
 	}
-	//Disable not in debug mode
+	
+	if (keyboard_check_pressed(vk_f7)) {
+		global.recording_gif = !global.recording_gif;
+		if (global.recording_gif) {
+			gif = gif_open(global.window_width, global.window_height);
+		} else {
+			randomise();
+			var filename = "eclipse_capture-" + string(irandom(2048)) + ".gif";
+			show_debug_message(filename);
+			gif_save(gif, filename);
+		}
+	}
+	
+	if (global.recording_gif) {
+		gif_add_surface(gif, application_surface, 2, 0, 0, 3);
+		
+		// Drawing
+		var gif_hud_surf = surface_create(global.window_width, global.window_height);
+		draw_set_color(c_white);
+		draw_set_alpha(0.5);
+		draw_set_font(global.font_small);
+		draw_text(0, 0, "RECORDING GIF");
+		draw_set_alpha(1);
+		
+		// End drawing
+		surface_reset_target();
+		draw_surface(gif_hud_surf, camera_get_view_x(view_camera[view_current]), camera_get_view_y(view_camera[view_current]))	
+	}
+	
+	//Exit if not in debug mode
 	if(!debug || !instance_exists(obj_player)) exit;
 	
 	draw_set_alpha(0.75);

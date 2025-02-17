@@ -26,7 +26,7 @@
 	//Do the skip
 	if(timer >= 64 && timer < 560)
 	{
-		if(Input.ActionPress || Input.StartPress)
+		if(Input.AllActionPress || Input.StartPress)
 		{
 			music_set_fade(FADE_OUT, 2);
 			timer = 560-1;

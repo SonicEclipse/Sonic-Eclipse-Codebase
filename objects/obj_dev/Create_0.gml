@@ -13,6 +13,7 @@
 	surf = surface_create(global.window_width, global.window_height);
 	caption = window_get_caption();
 	teleport_id = 0;
+	gif = 0;
 	
 	graded_surf = surface_create(WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2);
 	

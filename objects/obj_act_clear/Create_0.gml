@@ -10,3 +10,9 @@
 	
 	//Bonus
 	get_end_results();
+	
+	//Setup Variables for syncing to Tally jingle
+	tally_time_allot = 6.134 * 60 - 200;
+	interval = max(time_bonus div tally_time_allot, ring_bonus div tally_time_allot);
+	t_interval = interval;
+	r_interval = interval;

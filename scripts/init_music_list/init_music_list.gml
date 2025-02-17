@@ -11,7 +11,7 @@ function init_music_list()
 	music_add(J_GAME_OVER, j_game_over, 0.00, 0.00, false);
 	music_add(J_INVINCIBLE, j_invincible, 0.00, 0.00, false);
 	music_add(J_SPEEDSHOE, j_speedshoe, 0.00, 0.00, false);
-	music_add(J_ACT_CLEAR, jingle_zone_complete, 0.00, 0.00, false);
+	music_add(J_ACT_CLEAR, j_zone_complete, 0.00, 0.00, false);
 }
 
 	//Setup macros for music ID

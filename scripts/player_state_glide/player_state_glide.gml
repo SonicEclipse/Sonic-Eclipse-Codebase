@@ -1,6 +1,7 @@
 function player_state_glide(){
 	//Trigger the glide
-	if(state == ST_JUMP && character == CHAR_KNUX && press_action)
+	if((state == ST_JUMP || state == ST_ROLL)
+	&& character == CHAR_KNUX && ((press_action && !ground) || (ground && press_c)))
 	{
 		control_lock = 4;
 		glide_speed = 4;
@@ -9,13 +10,11 @@ function player_state_glide(){
 		state = ST_KNUXGLIDE;
 		facing = facing;
 		animation_play(animator, ANIM_KNUXGLIDE);
+		if (ground) state = ST_KNUXSLIDE;
 	}
 	
 	//If not gliding then stop
-	if(state != ST_KNUXGLIDE) 
-	{
-		exit;
-	}
+	if(state != ST_KNUXGLIDE) exit;
 	
 	//Change flags
 	movement_allow = false;
@@ -24,23 +23,21 @@ function player_state_glide(){
 	attacking = true;
 	
 	//Trigger the slide
-	if(ground)
-	{
-		state = ST_KNUXSLIDE;	
-	}
+	if(ground) state = ST_KNUXSLIDE;
 	
 	//Adjust y speed
-	if(y_speed < 0.5) 
-	{
-		y_speed += 0.125;
-	}
-	if(y_speed > 0.5) 
-	{
-		y_speed -= 0.125;
-	}
+	if(y_speed < 0.5) y_speed += 0.125;
+	if(y_speed > 0.5) y_speed -= 0.125;
 	
 	//Force x speed to glide speed
 	x_speed = glide_speed * dsin(knuckles_angle);
+	
+	//Cancel glide
+	if(press_b && !ground && state == ST_KNUXGLIDE
+		&& x_speed == glide_speed * dsin(knuckles_angle)) {
+		state = ST_ROLL;
+		control_lock = 4;
+	}
 	
 	//Accelerate
 	if(knuckles_angle == 90 || knuckles_angle == -90)

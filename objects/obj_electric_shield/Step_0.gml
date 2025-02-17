@@ -13,7 +13,7 @@
 	}
 	
 	//Double jump
-	if(obj_player.press_action && !obj_player.ground && obj_player.state == ST_JUMP
+	if(obj_player.press_c && !obj_player.ground && obj_player.state == ST_JUMP
 	&& shield_state == 0 && use_allow) 
 	{
 		//Player double jump

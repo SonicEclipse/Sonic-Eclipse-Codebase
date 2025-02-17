@@ -17,9 +17,12 @@ function player_states(){
 	//Sonic states:
 	player_state_peelout();
 	player_state_dropdash();
+	player_state_fast_spindash();
+	player_state_aerodash();
 	
 	//Tails states:
 	player_state_tailsfly();
+	player_action_ringtoss();
 	
 	//Knuckles states:
 	player_state_glide();

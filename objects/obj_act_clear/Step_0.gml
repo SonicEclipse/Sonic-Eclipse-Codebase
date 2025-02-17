@@ -37,43 +37,65 @@
 	}
 	
 	//Subtract from the count
-	if(timer > 450 && state = 0){
+	if(timer > 250 && state = 0){
 		//Subtract time bonus
 		if(time_bonus > 0) {
-			time_bonus -= 100; 
-			global.score += 100; 
-			total_bonus += 100
+			if (audio_sound_get_track_position(j_zone_complete) < 6.134)
+			{
+				t_interval = ((time_bonus > interval) ? interval : time_bonus);
+				
+				time_bonus -= t_interval; 
+				global.score += t_interval; 
+				total_bonus += t_interval;
+			}
+			else
+			{
+				global.score += time_bonus; 
+				total_bonus += time_bonus;
+				time_bonus -= time_bonus; 
+			}
 		}
 		
 		//Subtract ring bonus
 		if(ring_bonus > 0) {
-			ring_bonus -= 100; 
-			global.score += 100; 
-			total_bonus += 100
+			if (audio_sound_get_track_position(j_zone_complete) < 6.134)
+			{
+				r_interval = ((ring_bonus > interval) ? interval : ring_bonus);
+				
+				ring_bonus -= r_interval; 
+				global.score += r_interval; 
+				total_bonus += r_interval;
+			}
+			else
+			{
+				global.score += ring_bonus; 
+				total_bonus += ring_bonus;
+				ring_bonus -= ring_bonus; 
+			}
 		}
 		
 		//Play sound
 		if(global.object_timer mod 4 = 0 && time_bonus > 0 || global.object_timer mod 4 = 0 && ring_bonus > 0)
 			play_sound(sfx_scoreadd);
 		
-		//Skip the count down
-		if(Input.ActionPress && time_bonus > 0){
-			//Time bonus skip
-			global.score += time_bonus; 
-			total_bonus += time_bonus;
-			time_bonus -= time_bonus; 
-		}
+		////Skip the count down
+		//if(Input.AllActionPress && time_bonus > 0){
+		//	//Time bonus skip
+		//	global.score += time_bonus; 
+		//	total_bonus += time_bonus;
+		//	time_bonus -= time_bonus; 
+		//}
 		
-		if(Input.ActionPress && ring_bonus > 0){
-			//Ring bonus skip
-			global.score += ring_bonus; 
-			total_bonus += ring_bonus;
-			ring_bonus -= ring_bonus; 
-		}
+		//if(Input.AllActionPress && ring_bonus > 0){
+		//	//Ring bonus skip
+		//	global.score += ring_bonus; 
+		//	total_bonus += ring_bonus;
+		//	ring_bonus -= ring_bonus; 
+		//}
 		
 		//No more count down, switch to ending events
 		if(time_bonus = 0 && ring_bonus = 0){
-			play_sound(sfx_scoretally);
+		//	play_sound(sfx_scoretally);
 			timer = 0;
 			state = 1;
 		}
@@ -86,23 +108,23 @@
 	}
 	
 	//Ending events
-	if(state = 1 && !obj_level.act_transition)
+	if(state == 1 && !obj_level.act_transition)
 	{
-		if(timer = 80)
+		if(timer == 80)
 		{
 			obj_fade.fade_type = FADE_OUT;
 			obj_fade.fade_speed = 5;
 		}
 		
 		//Go to the next stage
-		if(timer = 110)
+		if(timer == 110)
 		{
 			reset_stage_data();
 			room_goto(obj_level.next_level);
 		}
 	}
 	
-	if(state = 1 && obj_level.act_transition){
+	if(state == 1 && obj_level.act_transition){
 		//Move in card stuff
 		if(timer >= 24+64)	offset_x[0] += 16;
 		if(timer >= 32+64)	offset_x[1] += 16;

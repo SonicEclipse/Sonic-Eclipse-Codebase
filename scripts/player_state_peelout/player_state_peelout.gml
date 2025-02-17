@@ -6,7 +6,7 @@ function player_state_peelout(){
 	}
 	
 	//Trigger peel out
-	if(state == ST_LOOKUP && press_action && ground && character == CHAR_SONIC)
+	if(state == ST_LOOKUP && all_press_action && ground) // && character == CHAR_SONIC)
 	{
 		play_sound(sfx_peelout_charge);
 		state = ST_PEELOUT
@@ -30,8 +30,8 @@ function player_state_peelout(){
 	movement_allow = 1 - ground;
 	
 	//Add rev value and clamp it
-	spindash_rev += 1;
-	spindash_rev = min(spindash_rev, 30);
+	spindash_rev += 2;	//Default: 1
+	spindash_rev = min(spindash_rev, 34);	//Default: max->30
 	
 	//Temp value for animation
 	var anim = ANIM_WALK;
@@ -42,7 +42,7 @@ function player_state_peelout(){
 	{
 		anim = ANIM_RUN;
 	}
-	if(spindash_rev = 30) 
+	if(spindash_rev >= 34) 
 	{
 		anim = ANIM_MAXRUN;
 	}

@@ -42,7 +42,7 @@ function player_state_jump(){
 	
 	
 	//Do the air roll
-	if(press_action && !ground && global.use_airroll)
+	if(all_press_action && !ground && global.use_airroll)
 	{
 		if(state == ST_NORMAL || state == ST_SPRING)
 		{

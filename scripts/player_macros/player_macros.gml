@@ -18,6 +18,8 @@ function player_macros(){
 	#macro ST_KNUXFALL 14
 	#macro ST_KNUXSLIDE 15
 	#macro ST_DROPDASH 16
+	#macro ST_FAST_SPINDASH 17
+	#macro ST_AERODASH 18
 	
 	//Animation macros:
 	#macro ANIM_STAND 0

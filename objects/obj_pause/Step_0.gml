@@ -1,7 +1,7 @@
 /// @description pause
 
 
-	if(Input.StartPress || Input.ActionPress){
+	if(Input.StartPress || Input.AllActionPress){
 		if delay > 2 
 		{
 			//play_sound(sfx_pause);

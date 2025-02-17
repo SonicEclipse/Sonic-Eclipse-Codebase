@@ -9,7 +9,12 @@
 	//Screen values
 	global.window_width  = 426;				//Window's horizontal size
 	global.window_height = 240;				//Window's vertical size
-	global.window_size   = 2;				//Window size multiplier
+	
+	//Read from save data
+	ini_open("data.ini");
+		global.window_size = ini_read_real("global", "window_size", 3);
+		global.window_fullscreen = ini_read_real("global", "fullscreen", 0);
+	ini_close();
 	
 	//keyboard inputs
 	global.up = vk_up;						
@@ -46,19 +51,20 @@
 	global.act_transition = false;			//Act transition trigger, this is active for a single frame when new act starts
 	
 	//Extra life stuff
-	global.score_extralife = 50000;			//Score threshold for extra life
+	global.score_extralife = 100000;		//Score threshold for extra life
 	global.ring_extralife = 100;			//Ring threshold for extra life
 	
 	//Customizables variables
 	global.rotation_type = 0;				//This changes player's visual rotation 
-	global.use_battery_rings = false;		//If this is disabled, destroying enemies will spawn flickies instead
+	global.use_battery_rings = true;		//If this is disabled, destroying enemies will spawn flickies instead
 	global.chaotix_monitors = false;		//Changes monitor icons to be like chaotix, monitor icon spins and it turns into dust
 	global.use_peelout = true;				//Flag that allows peel-out ability
 	global.use_dropdash = true;				//Flag that allows dropdash ability
-	global.use_airroll = false;				//Flag that allows rolling while air-borne
+	global.use_airroll = true;				//Flag that allows rolling while air-borne
 	global.chaotix_dust_effect = false;		//Flag that disables classic spindash/skid dust effect
 	global.camera_type = 1;					//Vertical camera scrolling type, 0 = Megadrive, 1 = Mania
-	global.knux_camera_smooth = false;		//Flag for using smooth ledge climb camera movement
+	global.knux_camera_smooth = true;		//Flag for using smooth ledge climb camera movement
+	global.extended_camera = true;			//Flag for Sonic CD-type extended camera
 	
 	//Font setup:
 	global.hud_number = font_add_sprite(spr_hud_numbers, ord("0"), false, 0);
@@ -66,20 +72,46 @@
 	global.font_small = font_add_sprite_ext(fontDebug, " ! #$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ", false, 0);
 	global.text_random = font_add_sprite_ext(spr_font_random, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.:-!", true, 1);
 	
+	//Additional variables
+	global.recording_gif = false;			//Status of GIF recorder
+	
 	//Create controllers:
 	instance_create_depth(0, 0, 0, obj_window);
 	instance_create_depth(0, 0, 0, obj_input);
 	instance_create_depth(0, 0, 0, obj_music);
 	instance_create_depth(0, 0, -100, obj_fade);
 	
-	//Controlers for dev mode
-	if(global.dev_mode) 
-	{
+	//Controllers for dev mode
+	if(global.dev_mode) {
 		instance_create_depth(0, 0, 0, obj_dev);
 		instance_create_depth(0, 0, 0, obj_shell);
 	}
 	
-	//Initilize the music list
+	//Custom crash handler made by PM13
+	exception_unhandled_handler(function(ex) {
+	    show_debug_message("--------------------------------------------------------------");
+	    show_debug_message("                   < ! >   < ! >   < ! >                      ");
+	    show_debug_message("--------------------------------------------------------------");
+	    show_debug_message("Unhandled exception " + string(ex));
+	    show_debug_message("--------------------------------------------------------------");
+	    show_debug_message("                   < ! >   < ! >   < ! >                      ");
+	    show_debug_message("--------------------------------------------------------------");
+	    if (file_exists("crash.txt")) file_delete("crash.txt");
+	    var _f = file_text_open_write("crash.txt");
+	    file_text_write_string(_f, string(ex));
+	    file_text_close(_f);
+		randomize();
+		var _error_start = choose("Whoopsie Daisy! Sonic Eclipse has fallen into one of Dr. Robotnik's Diabolical Traps and has to eXit.\nSorry for the inconvenience!",
+							"Well, that was uneXpected. Sonic Eclipse has fallen into one of Dr. Robotnik's Diabolical Traps and has to close.\nSorry for the inconvenience!",
+							"Uh oh! It broke! That was uneXpected.\nThe game must now close. Sorry!",
+							"We're eXtremely sorry! Looks like the game encountered a fatal error.");
+		var _error_string = _error_start + "\n\nIf you would like to help, please send \"crash.txt\" to the developers."
+		
+	    show_message(_error_string);
+	    return 0;
+	});
+	
+	//Initialize the music list
 	init_music_list();
 	
 	//Macros:
@@ -87,6 +119,9 @@
 	#macro WINDOW_WIDTH global.window_width
 	#macro WINDOW_HEIGHT global.window_height
 	#macro OBJECT_TIMER global.object_timer
+	
+	//Set fullscreen if needed
+	window_set_fullscreen(global.window_fullscreen);
 	
 	//Ending event:
 	room_goto_next();

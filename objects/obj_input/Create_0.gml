@@ -6,7 +6,8 @@
 	A = keyboard_check((global.a))
 	B = keyboard_check((global.b))
 	C = keyboard_check((global.c))
-	Action = A || B || C;
+	Action = A || B;
+	AllAction = A || B || C;
 	Start = keyboard_check((global.start))
 
 	//Pressed:
@@ -17,7 +18,8 @@
 	APress = keyboard_check_pressed((global.a))
 	BPress = keyboard_check_pressed((global.b))
 	CPress = keyboard_check_pressed((global.c))
-	ActionPress = APress || BPress || CPress;
+	ActionPress = APress || BPress;
+	AllActionPress = APress || BPress || CPress;
 	StartPress = keyboard_check_pressed((global.start))
 	
 	//Analog input presses:

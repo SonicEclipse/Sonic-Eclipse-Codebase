@@ -7,17 +7,12 @@
 	
 	//Change depth
 	if(frame == 0 && shield_state == 0)
-	{
 		depth = obj_player.depth + 10;
-	}
-	else
-	{
-		depth = obj_player.depth - 10;	
-	}
+	else depth = obj_player.depth - 10;	
 	
 
 	//Execute the double jump
-	if(obj_player.press_action && !obj_player.ground && obj_player.state == ST_JUMP
+	if(obj_player.press_c && !obj_player.ground && obj_player.state == ST_JUMP
 	&& shield_state == 0 && use_allow) 
 	{
 		//Dash the player

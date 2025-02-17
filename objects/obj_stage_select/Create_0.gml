@@ -9,7 +9,9 @@
 	reset_stage_data();
 	global.score = 0;
 
-	quotes = ["WELCOME TO HARMONY FRAMEWORK!"];
+	quotes = [	"WELCOME TO SONIC ECLIPSE",
+				"I LIKE MY SONICS ECLIPSE",
+				"SONIC... WELL... ECLIPSE"	];
 	
 	quote_index = irandom(array_length(quotes)-1);
 	

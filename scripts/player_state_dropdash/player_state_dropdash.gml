@@ -5,11 +5,9 @@ function player_state_dropdash(){
 	//Add dropdash timer
 	if(character == CHAR_SONIC)
 	{
-		if(press_action && dropdash_timer < 1 && state = ST_JUMP ||
-		hold_action && dropdash_timer != 0 && state = ST_JUMP)
-		{
+		if(press_b && dropdash_timer < 1 && state = ST_JUMP ||
+		hold_b && dropdash_timer != 0 && state = ST_JUMP)
 			dropdash_timer++;
-		}
 	}
 	//Trigger the dropdash state
 	if(dropdash_timer >= 8 && state != ST_DROPDASH)
@@ -20,10 +18,7 @@ function player_state_dropdash(){
 	
 	//Reset the timer
 	if(state != ST_JUMP || state == ST_DROPDASH || shield != S_NONE && shield != S_NORMAL)
-	{
-		
 		dropdash_timer = 0;
-	}
 		
 	
 	//If not dropdash stop
@@ -39,7 +34,7 @@ function player_state_dropdash(){
 	attacking = true;
 	
 	//Go back to jump when not holding the button
-	if(!hold_action)
+	if(!hold_b)
 	{
 		dropdash_timer = -1;
 		state = ST_JUMP;
